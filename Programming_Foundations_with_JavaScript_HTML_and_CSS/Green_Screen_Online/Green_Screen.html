@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Green Screen </title>
+    <script src = "https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+    </script>
+    <script src = "Green_Screen.js">
+    </script>
+    <link rel="stylesheet" href="Green_Screen.css">
+  </head>
+  <body>
+    <h1>
+      Image Composition
+    </h1>
+    <canvas id = "left">
+    </canvas>
+    <canvas id = "right">
+    </canvas>
+    <br>
+    <p>
+      Foreground: <input type = "file" multiple = "false" accept = "image/*" id = "fgimage" onchange = "loadForegroundImage()">
+      Background: <input type = "file" multiple = "false" accept = "image/*" id = "bgimage" onchange = "loadBackgroundImage()">
+    </p>
+    <input type = "button" value = "Create Composite" onclick = "doGreenScreen()">
+    <input type = "button" value = "Clear Canvas" onclick = "clearCanvas()">
+  </body>
+</html>

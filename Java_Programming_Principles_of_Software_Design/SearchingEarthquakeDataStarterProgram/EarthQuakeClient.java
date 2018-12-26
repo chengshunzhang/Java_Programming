@@ -42,6 +42,25 @@ public class EarthQuakeClient {
         return answer;
     }
     
+    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData,
+    String where, // "start", "end", or "any"
+    String phrase) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry> ();
+        for(QuakeEntry qe : quakeData) {
+            String title = qe.getInfo();
+            if(where.equals("start") && title.startsWith(phrase)) {
+                answer.add(qe);
+            }
+            if(where.equals("end") && title.endsWith(phrase)) {
+                answer.add(qe);
+            }
+            if(where.equals("any") && title.indexOf(phrase) != -1) {
+                answer.add(qe);
+            }
+        }
+        return answer;
+    }
+    
     public void dumpCSV(ArrayList<QuakeEntry> list){
         System.out.println("Latitude,Longitude,Magnitude,Info");
         for(QuakeEntry qe : list){
@@ -99,6 +118,19 @@ public class EarthQuakeClient {
             System.out.println(qe);
         }
         System.out.println("Found " + qod.size() + " quakes that match that criteria");
+    }
+    
+    public void quakesByPhrase() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        String source = "data/nov20quakedatasmall.atom";
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        String where = "any", phrase = "Can";
+        ArrayList<QuakeEntry> qbp = filterByPhrase(list, where, phrase);
+        for(QuakeEntry qe : qbp) {
+            System.out.println(qe);
+        }
+        System.out.println("Found " + qbp.size() + " quakes that match " + phrase + " at " + where);
     }
     
     public void createCSV(){

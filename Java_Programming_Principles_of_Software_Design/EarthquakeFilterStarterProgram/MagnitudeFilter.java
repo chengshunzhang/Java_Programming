@@ -18,4 +18,8 @@ public class MagnitudeFilter implements Filter {
         double mag = qe.getMagnitude();
         return (mag > minMag && mag < maxMag) || Math.abs(mag - minMag) < 1e-6 || Math.abs(mag - maxMag) < 1e-6;
     }
+    
+    public String getName() {
+        return "Magnitude";
+    }
 }

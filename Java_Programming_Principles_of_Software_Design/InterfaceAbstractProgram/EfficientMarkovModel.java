@@ -18,7 +18,7 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
     public void setTraining(String s){
         myText = s.trim();
         buildMap();
-        //printHashMapInfo();
+        printHashMapInfo();
     }
     
     public String getRandomText(int numChars){
@@ -50,7 +50,7 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
                 int index = myText.indexOf(key);
                 while(index != -1 && index < myText.length() - key.length()) {
                     follows.add(myText.substring(index + key.length(), index + key.length() + 1));
-                    index = myText.indexOf(key, index + key.length());
+                    index = myText.indexOf(key, index + 1);
                 }
                 myMap.put(key, follows);
             }
@@ -62,14 +62,14 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
         return myMap.get(key);
     }
     
-    /*public void printHashMapInfo() {
-        for(String key : myMap.keySet()) {
+    public void printHashMapInfo() {
+        /*for(String key : myMap.keySet()) {
             System.out.print(key + " : ");
             for(String s : myMap.get(key)) {
                 System.out.print("\"" + s + "\",");
             }
             System.out.println();
-        }
+        }*/
         System.out.println(myMap.size());
         int maxSize = 0;
         for(ArrayList<String> al : myMap.values()) {
@@ -78,13 +78,13 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
             }
         }
         System.out.println("largest size is " + maxSize);
-        for(String key : myMap.keySet()) {
+        /*for(String key : myMap.keySet()) {
             if(myMap.get(key).size() == maxSize) {
                 System.out.print("\"" + key + "\",");
             }
         }
-        System.out.println();
-    }*/
+        System.out.println();*/
+    }
     
     public String toString() {
         return "EfficientMarkovModel of order " + N;

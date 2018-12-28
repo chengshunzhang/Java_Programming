@@ -27,7 +27,7 @@ public abstract class AbstractMarkovModel implements IMarkovModel {
         int index = myText.indexOf(key);
         while(index != -1 && index < myText.length() - key.length()) {
             follows.add(myText.substring(index + key.length(), index + key.length() + 1));
-            index = myText.indexOf(key, index + key.length());
+            index = myText.indexOf(key, index + 1);
         }
         return follows;
     }

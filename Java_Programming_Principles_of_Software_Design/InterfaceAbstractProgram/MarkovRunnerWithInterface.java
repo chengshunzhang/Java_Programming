@@ -39,6 +39,31 @@ public class MarkovRunnerWithInterface {
 
     }
 
+    public void testHashMap() {
+        String st = "yes-this-is-a-thin-pretty-pink-thistle";
+        int size = 50, seed = 42;
+        EfficientMarkovModel markov = new EfficientMarkovModel(2);
+        markov.setRandom(seed);
+        markov.setTraining(st);
+    }
+    
+    public void compareMethods() {
+        FileResource fr = new FileResource();
+        String st = fr.asString();
+        st = st.replace('\n', ' ');
+        MarkovModel markov = new MarkovModel(2);
+        EfficientMarkovModel effMarkov = new EfficientMarkovModel(2);
+        int size = 1000, seed = 42;
+        long startTime = System.nanoTime();
+        runModel(markov, st, size, seed);
+        long endTime = System.nanoTime();
+        System.out.println("Time for MarkovModel is " + ((endTime - startTime) / 1e9));
+        startTime = System.nanoTime();
+        runModel(effMarkov, st, size, seed);
+        endTime = System.nanoTime();
+        System.out.println("Time for EfficientMarkovModel is " + ((endTime - startTime) / 1e9));
+    }
+    
     private void printOut(String s){
         String[] words = s.split("\\s+");
         int psize = 0;

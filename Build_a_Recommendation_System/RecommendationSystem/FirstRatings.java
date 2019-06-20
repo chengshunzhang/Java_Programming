@@ -70,7 +70,7 @@ public class FirstRatings {
         for(CSVRecord rec : fr.getCSVParser()) {
             String currId = rec.get("rater_id");
             if(!ids.containsKey(currId)) {
-                raters.add(new Rater(currId));
+                raters.add(new EfficientRater(currId));
                 ids.put(currId, raters.size() - 1);
             }
             Rater rater = raters.get(ids.get(currId));
